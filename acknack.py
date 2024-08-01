@@ -44,12 +44,12 @@ def main():
                 # As with the HEARTBEAT packets, DDS seems to be testing
                 # whether the publishing/subscribing capabilities work
                 # via the reader and writer entities.
-                subMessageFlags=0x03,
-                octetsToNextHeader=28,
-                reader_id=b"\x00\x00\x03\xc7",
-                writer_id=b"\x00\x00\x03\xc2",
-                readerSNState=b"\x00\x00\x00\x00\x01\x00\x00\x00\x00\x00\x00\x00",
-                count=1,
+                submessageFlags=0x01,
+                octetsToNextHeader=24,
+                reader_id=b"\x00\x02\x00\xc7",
+                writer_id=b"\x00\x02\x00\xc2",
+                readerSNState=b"\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00",
+                count=2 << 24,
             ),
         ]
     )
