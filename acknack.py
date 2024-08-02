@@ -13,7 +13,7 @@ from scapy.layers.inet import IP, UDP
 from common import APP_ID, HOST_ID, INSTANCE_ID, LISTENER_IP
 
 
-def main():
+def send_acknack(ros2_node_ip):
     rtps_packet = RTPS(
         # Using 2.3 for protocol version since ROS 2
         protocolVersion=ProtocolVersionPacket(major=2, minor=3),
@@ -55,11 +55,11 @@ def main():
     )
 
     udp_packet = UDP(sport=33653, dport=7400)
-    ip_packet = IP(dst=LISTENER_IP)
+    ip_packet = IP(dst=ros2_node_ip)
 
     packet = ip_packet / udp_packet / rtps_packet
     send(packet)
 
 
 if __name__ == "__main__":
-    main()
+    send_acknack(LISTENER_IP)
