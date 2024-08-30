@@ -54,25 +54,27 @@ sudo apt install wireshark
 8. In `common.py`. update the value of `LISTENER_IP` to the IP address of the
    listener VM. This can be found by running `hostname -I` on the VM.
 
-9. To replicate the amplification vulnerability discussed by the TrendMicro
-   researchers, run `python3 amplify.py` while having the listener node running.
-   This should cause the listener node to start sending ACKNACK and HEARTBEAT
-   packets to the IP address associated with the variable `HONEYPOT_IP` in
-   `common.py`.
+9. A server that uses a tool such as `tcpdump` should be set up so that it can
+   receive the traffic that is triggered by the amplification vulnerability.
+   Cloud computing platforms such as Amazon Web Services or Google Cloud
+   Platform offer such servers. From this point forward, this server will be
+   denoted as a **collector**.
+
+10. Obtain the **public** IP address of the collector and update the
+    `COLLECTOR_IP` to this IP. By doing this, the amplified packets will be
+    sent to the collector.
+
+11. To replicate the amplification vulnerability discussed by the TrendMicro
+    researchers, run `python3 amplify.py` while having the listener node running.
+    This should cause the listener node to start sending ACKNACK and HEARTBEAT
+    packets to the collector. Make sure to have `tcpdump` running to capture
+    the packets.
 
 ## Further Developments
 
 While this allows us to obtain the IP address of a ROS 2 node, we still need to
 to obtain information about its name and the topic(s) it publishes or is
-subscribed to. To do this, one of the possible methods we are looking into is
-to replicate the initial packet interaction between the talker and listener
-nodes. During this interaction, the nodes will send their names to each other.
-
-Specifically, the honeypot should respond with an ACKNACK packet if it receives
-an ACKNACK packet from a ROS 2 node. The code for sending this packet is
-available in `acknack.py`. Similarly. it should respond with a HEARTBEAT packet
-if it receives a HEARTBEAT packet instead. The code for this packet can be
-found in `heartbeat.py`. Lastly, after this series of packets, the honeypot
-should send a packet containing its name, which would then cause the listener
-node to respond with a packet containing its name. The code for this can be
-found in `topic_data.py`.
+subscribed to. One of the possible ways to do this is to replicate the initial
+handshake process between the talker and listener nodes, using a Python
+`systemctl` service on the collector to send packets back to the listener. This
+way, we will be able to find out more about the ROS 2 system under investigation.
