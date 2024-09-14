@@ -1,3 +1,5 @@
+import ipaddress
+
 HOST_ID = 0x010F4E32
 APP_ID = 0x0915C6E7
 INSTANCE_ID = 0x00000000
@@ -6,6 +8,17 @@ METATRAFFIC_UNICAST_PORT = 7410
 DEFAULT_UNICAST_PORT = 7411
 COLLECTOR_IP = "52.15.115.111"
 
+RESERVED_RANGES = {
+    ipaddress.IPv4Network("10.0.0.0/8"),
+    ipaddress.IPv4Network("172.16.0.0/12"),
+    ipaddress.IPv4Network("192.168.0.0/16"),
+    ipaddress.IPv4Network("169.254.0.0/16"),
+    ipaddress.IPv4Network("127.0.0.0/8"),
+    ipaddress.IPv4Network("192.0.2.0/24"),
+    ipaddress.IPv4Network("198.51.100.0/24"),
+    ipaddress.IPv4Network("203.0.113.0/24"),
+    ipaddress.IPv4Network("224.0.0.0/4"),
+}
 
 """
 1. Set up both VMs
