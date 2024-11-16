@@ -1,0 +1,17 @@
+[Unit]
+Description=ROS 2 scanner
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+ExecStart=/home/fayzah/scapy-rtps-experimentation/run.sh
+Restart=on-failure
+RestartSec=5s
+TimeoutSec=30s
+User=youruser
+Group=yourgroup
+Environment=MY_ENV_VAR=value
+LimitNOFILE=1024
+
+[Install]
+WantedBy=multi-user.target
