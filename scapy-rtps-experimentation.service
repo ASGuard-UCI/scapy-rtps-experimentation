@@ -4,7 +4,7 @@ After=network-online.target
 Wants=network-online.target
 
 [Service]
-ExecStart=/home/fayzah/scapy-rtps-experimentation/run.sh
+ExecStart=/home/fayzah/scapy-rtps-experimentation/run_scanner.sh
 Restart=on-failure
 RestartSec=5s
 TimeoutSec=30s
