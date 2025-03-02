@@ -44,3 +44,4 @@ async def basic_form():
 async def submit(ip: Annotated[str, Form()]):
     amplify_singular_ip(ip)
     print(ip)
+    return 200
