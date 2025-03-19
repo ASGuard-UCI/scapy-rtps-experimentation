@@ -43,5 +43,4 @@ async def basic_form():
 @app.post("/submit", status_code=status.HTTP_200_OK)
 async def submit(ip: Annotated[str, Form()]):
     amplify_singular_ip(ip)
-    print(ip)
     return 200
