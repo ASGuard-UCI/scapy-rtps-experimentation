@@ -5,7 +5,7 @@ Only run this file when launching the stack with Docker Compose. If you only
 want to send packets to a certain IP, run the Python script
 `amplification_vulnerability.py`, which takes in IPs from standard input.
 
-This file sets up a simple web page on http://localhost where you enter the IP
+This file sets up a simple web page on http://localhost:8000 where you enter the IP
 address of the talker Docker container (see `talker/Dockerfile`). Upon
 submitting, the crafted packet in `amplification_vulnerability.py` will be sent
 to the talker container, which will then send packets to the collector-server
