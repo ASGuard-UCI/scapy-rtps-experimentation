@@ -70,11 +70,29 @@ sudo apt install wireshark
     packets to the collector. Make sure to have `tcpdump` running to capture
     the packets.
 
+## Scanning the IPv4 Space
+
+A [fork of ZMap](https://github.com/ASGuard-UCI/zmap/) has been created that
+prunes the packet sending functionality so that only the IP generation remains
+and output each IP address generated without any additional logging statements.
+With this slimmer version of ZMap, it is possible to pipe its IP generation
+output into this Python program so that RTPS packets can be sent to the desired
+IPv4 subnets. For example:
+
+```sh
+zmap 1.2.3.4/32 | python amplification_vulnerability.py
+```
+
+Note that since this fork has been modified, it requires building from source.
+Please refer to the
+[INSTALL.md](https://github.com/ASGuard-UCI/zmap/blob/main/INSTALL.md) file to
+build and install it.
+
 ## Further Developments
 
 While this allows us to obtain the IP address of a ROS 2 node, we still need to
 to obtain information about its name and the topic(s) it publishes or is
-subscribed to. One of the possible ways to do this is to replicate the initial
+subscribed to. One way this might work is to do this is to replicate the initial
 handshake process between the talker and listener nodes, using a Python
 `systemctl` service on the collector to send packets back to the listener. This
 way, we will be able to find out more about the ROS 2 system under investigation.
