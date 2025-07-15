@@ -2,7 +2,7 @@ import os
 import time
 
 import scapy.config as conf
-from scapy.all import RawVal
+from scapy.all import *
 from scapy.contrib.rtps import RTPS
 from scapy.contrib.rtps.pid_types import *
 from scapy.contrib.rtps.rtps import *
