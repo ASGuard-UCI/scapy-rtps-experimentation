@@ -14,9 +14,10 @@ container.
 
 from typing import Annotated
 
-from amplification_vulnerability import amplify_singular_ip
 from fastapi import FastAPI, Form, status
 from fastapi.responses import HTMLResponse
+
+from amplification_vulnerability import amplify_ip
 
 app = FastAPI()
 
@@ -42,5 +43,5 @@ async def basic_form():
 
 @app.post("/submit", status_code=status.HTTP_200_OK)
 async def submit(ip: Annotated[str, Form()]):
-    amplify_singular_ip(ip)
+    amplify_ip(ip)
     return 200
